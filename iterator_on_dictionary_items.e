@@ -30,6 +30,7 @@ feature -- initialization
 
 	start
 		do
+			target.start
 			item_index := 1
 		end
 
@@ -45,12 +46,19 @@ feature -- initialization
 
 	next
 		do
+			target.forth
 			item_index := item_index + 1
+
 		end
 
 	is_off:BOOLEAN
 		do
 			Result := not target.valid_index (item_index)
+		end
+
+	is_end:BOOLEAN
+		do
+			Result := target.after
 		end
 
 		do_until (action: PROCEDURE [E]; test: FUNCTION [E, BOOLEAN])

@@ -12,9 +12,9 @@ feature
 	purchase_Instruction
 		--Display items which can be purchased by the user in 3 different gorups
 	do
-		print("<First<1>> Alienware 18 Laptop, (2) Tech Support, (1) USB %N")
-		print("<Second<2>> Macbook Pro, (3) USBs, (3) Tech Support, (3) Trojan Virus, (1) Anti-Virus, (1) USB Mouse %N")
-		print("<Third<3>> Jailbroken Chromebook, (4) USBs, (3) Trojan Viruses, (2) Anti-Viruses, (1) USB Mouse, (2) Tech Support, (1) Great IDE %N")
+		print("<1> Alienware 18 Laptop, (2) Tech Support, (1) USB %N")
+		print("<2> Macbook Pro, (3) USBs, (3) Tech Support, (3) Trojan Virus, (1) Anti-Virus, (1) USB Mouse %N")
+		print("<3> Jailbroken Chromebook, (4) USBs, (3) Trojan Viruses, (2) Anti-Viruses, (1) USB Mouse, (2) Tech Support, (1) Great IDE %N")
 		io.read_integer
 
 	end
@@ -38,9 +38,9 @@ feature
 	classChoose_Instruction
 		--Gives the user 3 option to choose for the identity
 		do
-			print("<First<1>> Hacker: Good with viruses and pretty fine with code but has a weakness for firewalls. Also low intelligence...%N")
-			print("<Second<2>> CEO: Very intelligent and lots and lots of system space but not the best with code.%N")
-			print("<Third<3>> Coder : Great with code, kinda bad system space, decent viruses and firewalls.%N")
+			print("<1> Hacker: Good with viruses and pretty fine with code but has a weakness for firewalls. Also low intelligence...%N")
+			print("<2> CEO: Very intelligent and lots and lots of system space but not the best with code.%N")
+			print("<3> Coder : Great with code, kinda bad system space, decent viruses and firewalls.%N")
 			io.read_integer
 		--	playerClass := io.last_integer
 
@@ -67,13 +67,13 @@ feature
 	merchant_not_enoght_money
 		--Inform the user for not having enought money to proceed
 			do
-				print("You don't have enough money for that. What?! you trying to scam me??")
+				print("You don't have enough money for that. What?! you trying to scam me??%N")
 			end
 
 	merchant_not_exist
 		--Inform the user for invalid item
 		do
-			print("Merchant: That doesn't exists!!")
+			print("Merchant: That doesn't exists!!%N")
 		end
 
 	statRead_Instruction(firewall:INTEGER;viruses:INTEGER;code:INTEGER;intelligence:INTEGER;system:INTEGER;level:INTEGER;xp:INTEGER)
@@ -149,7 +149,7 @@ feature
 			print(virusesMade)
 			print("%N Viruses Power: ")
 			print(virusAttack)
-			print("<6> See Full Stats")
+			print("<6> See Full Stats%N")
 			io.read_integer
 			--action := io.last_integer
 		end
@@ -160,65 +160,65 @@ feature
 		doBattle_not_valid_no
 		--Warn the user about the invalid number
 		do
-			print("You did not type in a valid number.")
+			print("You did not type in a valid number.%N")
 		end
 
 		doBattle_Need_Virus
 		--Inform to the user to make more viruses
 		do
-			print("You need to make a virus!")
+			print("You need to make a virus!%N")
 		end
 
 		doBattle_Build_virus
 		--inform the user that virus is built
 		do
-			print("You build a virus")
+			print("You build a virus%N")
 		end
 
 		doBattle_Defense_Improved
 		--Inform the user that the defense system is improved
 			do
-				print("Defense improved!")
+				print("Defense improved!%N")
 			end
 
 		doBattle_System_Improved
 		--Inform the user that the system is improved
 			do
-				print("System improved!")
+				print("System improved!%N")
 			end
 
 		doBattle_Repaired_System
 		--Inform the user that the system is repaired
 			do
-				print("You used a USB and repaired your system by 15.")
+				print("You used a USB and repaired your system by 15.%N")
 			end
 
 
 		doBattle_Leave_Battle
 		--Inform the user to leave the battle
 			do
-				print("You get to leave battle")
+				print("You get to leave battle%N")
 			end
 
 
 		doBattle_Increased_Deffense_Five
 		--Inform the user that the system defence is increased by 5
 			do
-				print("You increased your system defense by 5.")
+				print("You increased your system defense by 5.%N")
 			end
 
 
 		doBattle_More_Two_Virus
 		--Inform the user that the viruses got more powerful and you got two for free
 			do
-				print("Your viruses got more powerful and you got two for free!")
+				print("Your viruses got more powerful and you got two for free!%N")
 			end
 
 
 		doBattle_Not_Valid_Item
 		--Inform the user about invalid item
 			do
-				print("Not a valid item.")
+				print("Not a valid item.%N")
 			end
 
 
@@ -228,9 +228,11 @@ feature
 				if enemyAttack > myDefense then
 				print("Enemy attacks for ")
 					print(enemyAttack - myDefense)
+					print("%N")
 				else
 				print("Enemy attacks for ")
 				print(enemyAttack)
+				print("%N")
 			end
 			end
 
@@ -242,6 +244,7 @@ feature
 				print(" cash.%N")
 				print(sentHP)
 				print(" XP.")
+				print("%N")
 			end
 
 		inven_Read_Inventory_List(list:STRING)
@@ -256,7 +259,8 @@ feature
 		--Read the amount of bitcoins
 			do
 				print("%NBitCoins: ")
-				--print(cash)
+				print(cash)
+				print("%N")
 			end
 
 		app_Welcome(classstring:STRING)
@@ -267,18 +271,21 @@ feature
 
 				--		d.statread
 
-						print("You are travelling on a long journey away from your home in the land of C.")
+						print("You are travelling on a long journey away from your home in the land of C.%N")
 						print("In the distance you see a travler.%N")
-						print("%N Villager: Greetings young")
+						print("%N")
+						print("Villager: Greetings young ")
 						print(classstring)
-						print(".I'm afraid that I have troubling news!")
-						print(" My hometown of Macintosh has been terrorized by a near- by Code Dungeon.%N")
+						print("%N")
+						print("I'm afraid that I have troubling news!%N")
+						print("My hometown of Macintosh has been terrorized by a near- by Code Dungeon.%N")
 						print("Viruses leak out and murder our farmers. We may starve soon! It would be great if a ")
 						print(classstring)
 						print(" like you could help us!")
 
 						print("%NVillager: So will you accept?? %N")
 						print("<0> YES	<1> NO")
+						print("%N")
 
 						io.read_integer
 					--	accept := io.last_integer
@@ -288,7 +295,8 @@ feature
 				do
 				print("Villager: Thank you so much! What is your name great")
 				print(classstring)
-				print(" ?%N")
+				print(" ?")
+				print("%N")
 				io.read_line
 				end
 
@@ -307,7 +315,7 @@ feature
 				print("You might need them...%N")
 				print("%N Wow! That guy scammed you! He only gave you 20 coins!%N")
 				print("Villager: Oh! I forgot There is a boss who guards the door. Don't worry thuogh he's weak.")
-				print(" I'd watch out for mini boss though...")
+				print(" I'd watch out for mini boss though...%N")
 
 			end
 

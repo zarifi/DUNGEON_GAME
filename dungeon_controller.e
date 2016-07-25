@@ -15,6 +15,9 @@ feature --Attributes
 
 v: DUNGEON_VIEW
 m: DUNGEON_MODEL
+once
+	create Result.make
+end
 iterator:ITERATOR_ON_ARRAYED_LIST[STRING]
 inventory:ARRAYED_LIST[STRING]
 
@@ -22,24 +25,33 @@ feature --initialization
 		make
 
 			do
-				create m.make
 				create inventory.make (100)
 				create iterator.make(inventory)
-
 			end
 
 feature --Operations
 
+	test
+		do
+
+
+			
+
+		end
+
 	purchase
 		do
 			v.purchase_instruction
-			m.set_purchaseno (io.last_integer)
+			m.set_purchaseno (io.last_integer_32)
 		end
 
 	main_Opt
 		do
 			v.mainopt_instruction
+		--	m.set_mainOption (a)
 			m.set_mainoption (io.last_integer)
+		--	print("this is controller%N")
+		--	print(m.mainoption)
 		end
 
 	class_Choose
@@ -48,21 +60,21 @@ feature --Operations
 			m.set_playerclass (io.last_integer)
 
 			if m.playerclass = 1 then
-				m.classstring := "hacker"
+				m.set_classstring ("Hacker")
 		    	m.set_firewall (1)
 		    	m.set_viruses(4)
 			    m.set_code (3)
 			    m.set_system (20) --(random.item \\ 20) + 20
 			    m.set_intelligence ((random.item \\ 2) + 1)
 			else if m.playerclass = 2 then
-				m.classstring := "CEO"
+				m.set_classstring("CEO")
 				m.set_firewall (random.item \\ 2 + 1)
 				m.set_viruses (random.item \\ 1 + 3)
 				m.set_code (random.item \\ 1 + 2)
 				m.set_system (30) --random.item \\ 20 + 30
 				m.set_intelligence (random.item \\ 2 + 4)
 			else if m.playerclass = 3 then
-				m.classstring := "coder"
+				m.set_classstring("coder")
 				m.set_firewall (random.item \\ 1 + 3)
 				m.set_viruses (random.item \\ 1 + 3)
 				m.set_code (random.item \\ 1 + 4)
@@ -164,7 +176,7 @@ feature --Operations
 			from
 
 			until
-				m.system > 0 and enemyHP > 0
+				m.system < 0 and enemyHP < 0
 			loop
 				v.dobattle_instruction(m.system,myDefense,enemyHP,enemyAttack,enemyDefense,virusesMade,virusAttack)
 				action := io.last_integer
