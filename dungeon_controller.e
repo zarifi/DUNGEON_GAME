@@ -35,7 +35,7 @@ feature --Operations
 		do
 
 
-			
+
 
 		end
 
@@ -176,7 +176,7 @@ feature --Operations
 			from
 
 			until
-				m.system < 0 and enemyHP < 0
+				m.system < 0 or enemyHP < 0
 			loop
 				v.dobattle_instruction(m.system,myDefense,enemyHP,enemyAttack,enemyDefense,virusesMade,virusAttack)
 				action := io.last_integer
@@ -191,10 +191,12 @@ feature --Operations
 						if virusAttack - enemyDefense > 0 then
 							enemyHP := enemyHP - virusAttack
 							virusesMade := virusesMade - 1
+						end
 						else
 							v.dobattle_need_virus
 							action := 7
-						end
+
+
 
 					end
 				else if action = 2 then
@@ -259,7 +261,14 @@ feature --Operations
 
 			end
 			if action /= 6 or action /= 7 then
-				v.dobattle_enemy_attack(enemyAttack,myDefense)
+				if (enemyAttack > myDefense) then
+					m.set_system (m.system-(enemyAttack - myDefense))
+					v.dobattle_enemy_attack(enemyAttack,myDefense)
+				else
+					m.set_system (m.system - enemyAttack)
+					v.dobattle_enemy_attack(enemyAttack,myDefense)
+				end
+
 
 			end
 			enemyAttack := enemyAttack + 1
