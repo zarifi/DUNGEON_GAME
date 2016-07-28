@@ -1,5 +1,6 @@
 note
-	description: "DUNGEON_GAME application root class"
+	description: "Summary description for {APPLICATION}."
+	author: ""
 	date: "$Date$"
 	revision: "$Revision$"
 
@@ -31,7 +32,7 @@ feature -- Run the Application
 	local
 		rand, open, guac:INTEGER
 	do
-		print ("Welcome to the Dunegon game!%N")
+		print ("%NWelcome to the Dunegon game!%N")
 	--	c.test
 	--	io.read_integer
 		c.class_choose
@@ -119,7 +120,7 @@ feature -- Run the Application
 			from
 
 			until
-				c.m.system < 0
+				c.m.system <= 0 or c.m.win >= 5
 			loop
 				if c.m.xp = c.m.level * 100 then
 					v.app_boss_fight
@@ -133,6 +134,10 @@ feature -- Run the Application
 						c.m.set_intelligence(c.m.intelligence + c.m.level)
 						c.m.set_xp(0)
 						c.statread
+						if (c.m.level = 1) then
+							print("%N%N")
+							v.instruction_level2
+						end
 					end
 				else
 					c.main_opt
@@ -147,10 +152,10 @@ feature -- Run the Application
 						print(not c.m.explored)
 						if not c.m.explored then
 							c.m.set_explored (true)
-							rand := 0
+							rand := c.random.item \\ 100
 							v.app_explore_room
 							print(rand)
-							if rand = 0 then
+							if rand >= 0 and rand <= 10 then
 								v.app_ask_computer_open
 								open := io.last_integer
 
@@ -161,13 +166,17 @@ feature -- Run the Application
 									else
 										v.app_found_1000_bitcoin
 										c.m.set_cash (c.m.cash + 1000)
+
 									end
 
 								end
-							else if rand <= 50 then
+							else if rand > 10 and rand <= 60 then
 								v.app_enemy_coder
-								if c.dobattle ("Hacker", (c.m.level+2)*10, (c.m.level+2)*2, (c.m.level+2)*2) then
+								if c.dobattle ("Hacker", (c.m.level+2)*5, (c.m.level+2)*2, (c.m.level+2)*2) then
 									v.app_won
+									c.m.set_win (c.m.win + 1)
+									c.m.set_system (c.m.system + 20)
+									v.app_win_enemy
 								end
 							else if rand = 99 then
 								v.app_ask_bowl_investigate
@@ -180,10 +189,11 @@ feature -- Run the Application
 								else
 									v.app_not_quac
 								end
-							else if rand > 85 then
+							else if rand > 95 then
 								v.app_encounter_mini_boss
-								if c.dobattle ("CEO Hacker", rand, rand, rand) then
+								if c.dobattle ("CEO Hacker",(c.m.level+2)*5, (c.m.level+2)*2, (c.m.level+2)*2) then
 									v.app_beat_mini_boss
+									c.m.set_win (5)
 								end
 							else
 								v.app_find_nothing
@@ -238,7 +248,12 @@ feature -- Run the Application
 
 
 			end
-			v.app_you_died
+			if c.m.win >= 5 then
+				v.app_win
+			else
+				v.app_you_died
+			end
+
 
 		else
 			v.app_village_slaughtered
