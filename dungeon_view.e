@@ -497,6 +497,8 @@ feature
 end
 =======
 note
+=======
+>>>>>>> ad3828d99ae2b9c413ab11d3cd5cfdd077ed3eba
 	description: "Summary description for {DUNGEON_VIEW}."
 	author: ""
 	date: "$Date$"
@@ -989,4 +991,7 @@ feature
 				print("%NAwesome! You beat the enemy! Your System status has been improved by 20 points!!%N ")
 			end
 end
+<<<<<<< HEAD
+>>>>>>> ad3828d99ae2b9c413ab11d3cd5cfdd077ed3eba
+=======
 >>>>>>> ad3828d99ae2b9c413ab11d3cd5cfdd077ed3eba

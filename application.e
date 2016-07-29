@@ -312,6 +312,8 @@ feature -- Run the Application
 
 end --APPLICATION
 =======
+=======
+>>>>>>> ad3828d99ae2b9c413ab11d3cd5cfdd077ed3eba
 note
 	description: "Summary description for {APPLICATION}."
 	author: ""
@@ -581,4 +583,7 @@ feature -- Run the Application
 
 
 end --APPLICATION
+<<<<<<< HEAD
+>>>>>>> ad3828d99ae2b9c413ab11d3cd5cfdd077ed3eba
+=======
 >>>>>>> ad3828d99ae2b9c413ab11d3cd5cfdd077ed3eba
