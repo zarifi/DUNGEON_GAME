@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 note
 	description: "Summary description for {DUNGEONVIEW}."
 	author: ""
@@ -990,4 +990,4 @@ feature
 				print("%NAwesome! You beat the enemy! Your System status has been improved by 20 points!!%N ")
 			end
 end
->>>>>>> ad3828d99ae2b9c413ab11d3cd5cfdd077ed3eba
+
