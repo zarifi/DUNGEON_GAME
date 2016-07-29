@@ -12,12 +12,17 @@ feature
 	purchase_Instruction
 		--Display items which can be purchased by the user in 3 different gorups
 	do
-		print("<1> Alienware 18 Laptop, (2) Tech Support, (1) USB %N")
-		print("<2> Macbook Pro, (3) USBs, (3) Tech Support, (3) Trojan Virus, (1) Anti-Virus, (1) USB Mouse %N")
-		print("<3> Jailbroken Chromebook, (4) USBs, (3) Trojan Viruses, (2) Anti-Viruses, (1) USB Mouse, (2) Tech Support, (1) Great IDE %N")
+		print("<1> Supercomputer, (2) Geek Help, (1) Worm, (1) Microcomputer, Elder Wand %N")
+		print("<2> PC, (2) Microcomputer, (3) Geek Help, (3) Worm, (1) Firewall, Invisibility Cloak %N")
+		print("<3> Embedded Computer, (3) Microcomputer, (2) Geek Help, (3) Worm, (1) Firewall,Resurrection Stone %N")
 		io.read_integer
 
 	end
+
+	purchase_wrong_number
+		do
+			print("You did not choose from the provided items so I would give you ranfom items")
+		end
 
 
 	mainOpt_Instruction
@@ -51,10 +56,10 @@ feature
 		--Display the items that user can buy
 			do
 				print("Shady Merchant: Buy Something!?!?! %N")
-				print("<1> USB - 10 BitCoins %N")
-				print("<2> Tech Support - 20 BitCoins %N")
-				print("<3> Trojan Virus - 30 BitCoins %N")
-				print("<4> Anti-Virus - 15 BitCoins %N")
+				print("<1> Microcomputer - 10 BitCoins %N")
+				print("<2> Geek Help - 20 BitCoins %N")
+				print("<3> Worm - 30 BitCoins %N")
+				print("<4> Firewall - 15 BitCoins %N")
 				print("%N")
 				print("BitCoins: ")
 				print(cash)
@@ -247,10 +252,43 @@ feature
 				print("%N")
 			end
 
+		doBattle_system_improved_20
+			do
+				print("Your system status has been improved by 20 %N")
+			end
+
+		doBattle_system_improved_5
+			do
+				print("Your system status has been improved by 5 %N")
+			end
+
+		doBattle_system_improved_10
+			do
+				print("Your system status has been improved by 10 %N")
+			end
+
+		doBattle_system_improved_15
+			do
+				print("Your system status has been improved by 15 %N")
+			end
+
+		doBattle_firewall_improved
+			do
+				print("Firewall has been improved by 5 %N")
+			end
+
+		doBattle_viruses_improved_3
+			do
+				print("Your viruses have been improved by 3 %N")
+			end
+
+		doBattle_luck_item
+			do
+				print("I told you cannot use this item, you should keep it for its luck!!!!")
+			end
 		inven_Read_Inventory_List(list:STRING)
 		--Read the inventory items and display their numbers
 			do
-				print("--Inventory-- %N")
 				print(list)
 				print("%N")
 			end
@@ -442,4 +480,18 @@ feature
 				print("Villager: Oh... That's okay...%N")
 				print("The whole village of Macintosh was later slaughtered...")
 			end
+
+
+			app_win
+				do
+					print("%N%N%N")
+					print("Congratulations!! You won the game%N")
+					print("Come back again%N")
+				end
+
+			app_win_enemy
+				do
+					print("Awsome! You beat the enemy! Your system status has been improved by 20 points.%N")
+
+				end
 end

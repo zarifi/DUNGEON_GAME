@@ -32,8 +32,9 @@ feature -- Run the Application
 		rand, open, guac:INTEGER
 	do
 		print ("Welcome to the Dunegon game!%N")
-	--	c.test
-	--	io.read_integer
+		--print(c.test)
+		--print(c.inventory.array_at (1))
+		--io.read_integer
 		c.class_choose
 		c.statread
 		v.app_welcome(c.m.classstring)
@@ -46,7 +47,6 @@ feature -- Run the Application
 			c.purchase
 
 			if c.m.purchaseno = 1 then
-				c.inventory.extend ("Alienware 18")
 				--Set stats for computer
 				c.m.set_firewall (c.m.firewall + 5)
 				c.m.set_viruses (c.m.viruses + 3)
@@ -54,13 +54,15 @@ feature -- Run the Application
 				c.m.set_system (c.m.system + 50)
 
 				--Inventory Update
-
-				c.inventory.extend ("Tech Support")
-				c.inventory.extend ("Tech Support")
-				c.inventory.extend ("USB")
-
+				c.inventory.extend ("Supercomputer")
+				c.inventory.extend ("Geek Help")
+				c.inventory.extend ("Geek Help")
+				c.inventory.extend ("Worm")
+				c.inventory.extend ("Worm")
+				c.inventory.extend ("Microcomputer")
+				c.inventory.extend ("Elder Wand")
 			else if c.m.purchaseno = 2 then
-				c.inventory.extend ("Macbook Pro")
+				c.inventory.extend ("PC")
 				--stats for computer
 
 				c.m.set_firewall (c.m.firewall + 4)
@@ -69,49 +71,46 @@ feature -- Run the Application
 				c.m.set_system (c.m.system + 20)
 				c.m.set_intelligence (c.m.intelligence + 1)
 
-				c.inventory.extend ("USB")
-				c.inventory.extend ("USB")
-				c.inventory.extend ("USB")
-				c.inventory.extend ("Tech Support")
-				c.inventory.extend ("Tech Support")
-				c.inventory.extend ("Tech Support")
-				c.inventory.extend ("Trojan Virus")
-				c.inventory.extend ("Trojan Virus")
-				c.inventory.extend ("Trojan Virus")
-				c.inventory.extend ("Anti-Virus")
-				c.inventory.extend ("USB Mouse")
+				c.inventory.extend ("Microcomputer")
+				c.inventory.extend ("Microcomputer")
+				c.inventory.extend ("Geek Help")
+				c.inventory.extend ("Geek Help")
+				c.inventory.extend ("Geek Help")
+				c.inventory.extend ("Worm")
+				c.inventory.extend ("Worm")
+				c.inventory.extend ("Worm")
+				c.inventory.extend ("Firewall")
+				c.inventory.extend	("Invisibility Cloak")
 			else if c.m.purchaseno = 3 then
-				c.inventory.extend ("Jailbroken Chromebook")
+				c.inventory.extend ("Embedded Computer")
 				--Computer stats
 				c.m.set_firewall (c.m.firewall + 3)
 				c.m.set_viruses (c.m.viruses + 1)
 				c.m.set_code (c.m.code + 1)
 				c.m.set_system (c.m.system + 10)
 
-				c.inventory.extend ("USB")
-				c.inventory.extend ("USB")
-				c.inventory.extend ("USB")
-				c.inventory.extend ("USB")
-				c.inventory.extend ("Trojan Virus")
-				c.inventory.extend ("Trojan Virus")
-				c.inventory.extend ("Trojan Virus")
-				c.inventory.extend ("Anti-Virus")
-				c.inventory.extend ("Anti-Virus")
-				c.inventory.extend ("USB Mouse")
-				c.inventory.extend ("Tech Support")
-				c.inventory.extend ("Tech Support")
-				c.inventory.extend ("Great IDE")
+				c.inventory.extend ("Microcomputer")
+				c.inventory.extend ("Microcomputer")
+				c.inventory.extend ("Microcomputer")
+				c.inventory.extend ("Worm")
+				c.inventory.extend ("Worm")
+				c.inventory.extend ("Worm")
+				c.inventory.extend ("Firewall")
+				c.inventory.extend ("Geek Help")
+				c.inventory.extend ("Geek Help")
+				c.inventory.extend ("Resurrection Stone")
 
 			else
-				c.inventory.extend ("Moldy Sandwich")
-				c.inventory.extend ("How to: Java Guide")
+				v.purchase_wrong_number
+				c.inventory.extend ("Microcomputer")
+				c.inventory.extend ("Geek Help")
+				c.inventory.extend ("Elder Wand")
 
 			end
 			end
 			end
 
 			v.app_message_bitcoin
-
 			c.m.set_cash (c.m.cash + 20)
 			c.m.set_explored (false)
 			c.m.set_room (1)
@@ -119,7 +118,7 @@ feature -- Run the Application
 			from
 
 			until
-				c.m.system < 0
+				c.m.system <= 0 or c.m.win >= 5
 			loop
 				if c.m.xp = c.m.level * 100 then
 					v.app_boss_fight
@@ -147,10 +146,11 @@ feature -- Run the Application
 						print(not c.m.explored)
 						if not c.m.explored then
 							c.m.set_explored (true)
-							rand := 0
+							rand := c.random.item \\ 100
 							v.app_explore_room
 							print(rand)
-							if rand = 0 then
+							print("%N")
+							if rand >= 0 and rand <= 10 then
 								v.app_ask_computer_open
 								open := io.last_integer
 
@@ -164,15 +164,17 @@ feature -- Run the Application
 									end
 
 								end
-							else if rand <= 50 then
+							else if rand > 10 and rand <= 60 then
 								v.app_enemy_coder
-								if c.dobattle ("Hacker", (c.m.level+2)*10, (c.m.level+2)*2, (c.m.level+2)*2) then
+								if c.dobattle ("Hacker", (c.m.level+2)*5, (c.m.level+2)*2, (c.m.level+2)*2) then
 									v.app_won
+									c.m.set_win (c.m.win + 1)
+									c.m.set_system(c.m.system + 20)
+									v.app_win_enemy
 								end
 							else if rand = 99 then
 								v.app_ask_bowl_investigate
 								guac := io.last_integer
-
 								if guac = 1 then
 									v.app_quac_key
 									c.m.set_system (c.m.system + 100)
@@ -180,10 +182,11 @@ feature -- Run the Application
 								else
 									v.app_not_quac
 								end
-							else if rand > 85 then
+							else if rand > 95 then
 								v.app_encounter_mini_boss
-								if c.dobattle ("CEO Hacker", rand, rand, rand) then
+								if c.dobattle ("CEO Hacker", (c.m.level+2)*5, (c.m.level+2)*2, (c.m.level+2)*2) then
 									v.app_beat_mini_boss
+									c.m.set_win (5)
 								end
 							else
 								v.app_find_nothing
@@ -210,15 +213,65 @@ feature -- Run the Application
 						c.m.set_explored (false)
 						c.m.set_room (c.m.room + 1)
 					else if c.m.mainoption = 6 then
-						c.m.set_selectitem (c.invenask)
+						c.m.set_selectitem (c.invenask - 1)
 
-						if c.inventory.array_item (c.m.selectItem).is_equal ("USB") then
-							c.m.set_system (c.m.system + 15)
-							v.app_need_usb_repaired_15
-							c.inventory.go_i_th (c.m.selectItem)
+					if  c.inventory.array_at (c.m.selectItem).is_equal ("Embedded Computer") then
+						c.m.set_system (c.m.system + 15)
+						c.inventory.go_i_th (c.m.selectItem + 1)
+						c.inventory.remove
+						v.dobattle_system_improved_10
+					else if  c.inventory.array_at (c.m.selectItem).is_equal ("PC") then
+						c.m.set_system (c.m.system + 15)
+						c.inventory.go_i_th (c.m.selectItem + 1)
+						c.inventory.remove
+						v.dobattle_system_improved_15
+					else if c.inventory.array_at (c.m.selectItem).is_equal ("Supercomputer") then
+						c.m.set_system (c.m.system + 20)
+						c.inventory.go_i_th (c.m.selectItem + 1)
+						v.dobattle_system_improved_20
+					else if c.inventory.array_item (c.m.selectItem).is_equal("Microcomputer") then
+						c.m.set_system (c.m.system + 5)
+						c.inventory.go_i_th (c.m.selectItem + 1)
+						c.inventory.remove
+						v.dobattle_system_improved_5
+					else if c.inventory.array_item (c.m.selectItem).is_equal("Geek Help") then
+						c.m.set_system (c.m.system + 10)
+						c.inventory.go_i_th (c.m.selectItem + 1)
+						c.inventory.remove
+						v.dobattle_system_improved_10
+					else if c.inventory.array_item (c.m.selectItem).is_equal("Firewall") then
+							c.m.set_firewall (c.m.firewall + 5)
+							c.inventory.go_i_th (c.m.selectItem + 1)
 							c.inventory.remove
+							v.dobattle_firewall_improved
+					else if c.inventory.array_item (c.m.selectItem).is_equal("Worm") then
+							c.m.set_viruses (c.m.viruses + 3)
+							c.inventory.go_i_th (c.m.selectItem + 1)
+							c.inventory.remove
+							v.dobattle_viruses_improved_3
+
+						else if c.inventory.array_at (c.m.selectItem).is_equal ("Elder Wand") then
+							v.dobattle_luck_item
+
+
+						else if c.inventory.array_at (c.m.selectItem).is_equal ("Invisibility Cloak") then
+							v.dobattle_luck_item
+
+					else if c.inventory.array_at (c.m.selectItem).is_equal ("Resurrection Stone") then
+							v.dobattle_luck_item
+
 						else
-							v.app_not_valid_item
+
+										v.app_not_valid_item
+							end
+							end
+							end
+							end
+							end
+							end
+							end
+							end
+							end
 
 						end
 
@@ -238,7 +291,12 @@ feature -- Run the Application
 
 
 			end
+			if c.m.win >= 5 then
+				v.app_win
+			else
 			v.app_you_died
+			end
+
 
 		else
 			v.app_village_slaughtered

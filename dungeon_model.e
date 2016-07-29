@@ -20,9 +20,10 @@ feature --All attributes in the project
 		cash: INTEGER			assign set_cash
 		level: INTEGER			assign set_level
 		XP: INTEGER				assign set_xp
-		mainOption: INTEGER
+		mainOption: INTEGER_32		assign set_mainOption
 		room: INTEGER
 		playerClass: INTEGER
+		win:INTEGER				assign set_win
 
 		--inventory: ARRAYED_LIST[STRING]
 
@@ -62,6 +63,7 @@ feature --Initializing the attributes in the project
 		guac := 0
 		selectItem := 0
 		name := ""
+		win := 0
 
 	end
 
@@ -178,10 +180,16 @@ feature -- mutators - also known as the settler; changes some property of an obj
 		-- It helps the controller/user to change or update the values/data of the attributes throughout the program.
 		-- It helps to keep track of the most recent value of an attribute.
 
+
 			set_classString(s:STRING)
 					do
 						classString := s
 					end
+
+			set_win(n:INTEGER)
+				do
+					win := n
+				end
 
 			set_firewall(n: INTEGER)
 				do
@@ -228,7 +236,7 @@ feature -- mutators - also known as the settler; changes some property of an obj
 				room := n
 			end
 
-			set_mainOption(n:INTEGER)
+			set_mainOption(n:INTEGER_32)
 			do
 				mainOption := n
 			end
