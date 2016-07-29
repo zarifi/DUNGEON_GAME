@@ -31,11 +31,25 @@ feature --initialization
 
 feature --Operations
 
-	test
+	test:INTEGER
+
+		local
+		invenOption:INTEGER
 		do
-
-
-
+			inventory.extend ("first")
+			inventory.extend ("second")
+			inventory.extend ("third")
+			from
+				iterator.start
+			until
+				iterator.is_end
+			loop
+				v.invenask_instruction(iterator.item,iterator.index)
+				iterator.next
+			end
+			v.invenask_input
+			invenOption := io.last_integer
+			Result := invenOption
 
 		end
 
@@ -97,21 +111,21 @@ feature --Operations
 
 			if m.get_buy = 1 then
 				if m.get_cash >= 10 then
-					inventory.extend ("USB")
+					inventory.extend ("Microcomputer")
 					m.set_cash (m.cash - 10)
 				else
 					v.merchant_not_enoght_money
 				end
 			else if m.get_buy = 2 then
 				if m.get_cash >= 20 then
-					inventory.extend ("Tech Support")
+					inventory.extend ("Geek Help")
 					m.set_cash (m.cash - 20)
 				else
 					v.merchant_not_enoght_money
 				end
 			else if m.get_buy = 3 then
 				if m.get_cash >= 30 then
-					inventory.extend ("Trojan Virus")
+					inventory.extend ("Worm")
 					m.set_cash (m.cash - 30)
 				else
 					v.merchant_not_enoght_money
@@ -119,7 +133,7 @@ feature --Operations
 				end
 			else if m.get_buy = 4 then
 				if m.get_cash >= 15 then
-					inventory.extend ("Anti-Virus")
+					inventory.extend ("Firewall")
 					m.set_cash (m.cash - 15)
 				else
 					v.merchant_not_enoght_money
@@ -148,18 +162,22 @@ feature --Operations
 	local
 		invenOption:INTEGER
 		do
+
 			from
 				iterator.start
 			until
-				iterator.is_off
+				iterator.is_end
 			loop
+
 				v.invenask_instruction(iterator.item,iterator.index)
 				iterator.next
 			end
 			v.invenask_input
 			invenOption := io.last_integer
 			Result := invenOption
-		end
+
+
+	end
 
 	doBattle(name:STRING; sentHP:INTEGER; sentAttack:INTEGER; sentDefense:INTEGER): BOOLEAN
 	local
@@ -176,7 +194,7 @@ feature --Operations
 			from
 
 			until
-				m.system < 0 or enemyHP < 0
+				m.system <= 0 or enemyHP <= 0
 			loop
 				v.dobattle_instruction(m.system,myDefense,enemyHP,enemyAttack,enemyDefense,virusesMade,virusAttack)
 				action := io.last_integer
@@ -187,6 +205,7 @@ feature --Operations
 				end
 
 				if action = 1 then
+
 					if virusesMade > 0 then
 						if virusAttack - enemyDefense > 0 then
 							enemyHP := enemyHP - virusAttack
@@ -213,36 +232,64 @@ feature --Operations
 					myDefense := myDefense + (m.code + m.firewall) // 2
 					v.dobattle_defense_improved
 				else if action = 4 then
-					m.set_system (m.intelligence // 2 + m.code // 2)
+					m.set_system (m.system + m.intelligence // 2 + m.code // 2)
 					v.dobattle_system_improved
 				else if action = 5 then
-					m.set_selectitem (invenAsk)
+					selectItem := invenAsk - 1
 
-					if inventory.array_item (selectItem).is_equal ("USB") then
+					if  inventory.array_at (selectItem).is_equal ("Embedded Computer") then
+							m.set_system (m.system + 15)
+							inventory.go_i_th (selectItem + 1)
+							inventory.remove
+							v.dobattle_system_improved_10
+					else if  inventory.array_at (selectItem).is_equal ("PC") then
 						m.set_system (m.system + 15)
-						inventory.go_i_th (selectItem)
+						inventory.go_i_th (selectItem + 1)
 						inventory.remove
-						v.dobattle_repaired_system
-					else if inventory.array_item (selectItem).is_equal("Tech Support") then
-						v.dobattle_leave_battle
-						inventory.go_i_th (selectItem)
+						v.dobattle_system_improved_15
+					else if inventory.array_at (selectItem).is_equal ("Supercomputer") then
+						m.set_system (m.system + 20)
+						inventory.go_i_th (selectItem + 1)
 						inventory.remove
-						Result := True
+						v.dobattle_system_improved_20
+					else if inventory.array_item (selectItem).is_equal("Microcomputer") then
+						m.set_system (m.system + 5)
+						inventory.go_i_th (selectItem + 1)
+						inventory.remove
+						v.dobattle_system_improved_5
+					else if inventory.array_item (selectItem).is_equal("Geek Help") then
+						m.set_system (m.system + 10)
+						inventory.go_i_th (selectItem + 1)
+						inventory.remove
+						v.dobattle_system_improved_10
+					else if inventory.array_item (selectItem).is_equal("Firewall") then
+							m.set_firewall (m.firewall + 5)
+							inventory.go_i_th (selectItem + 1)
+							inventory.remove
+							v.dobattle_firewall_improved
+					else if inventory.array_item (selectItem).is_equal("Worm") then
+							m.set_viruses (m.viruses + 3)
+							inventory.go_i_th (selectItem + 1)
+							inventory.remove
+							v.dobattle_viruses_improved_3
+					else if inventory.array_at (selectItem).is_equal ("Elder Wand") then
+							v.dobattle_luck_item
 
-					else if inventory.array_item (selectItem).is_equal ("Anti-Virus") then
-							myDefense := myDefense + 5
-							inventory.go_i_th (selectItem)
-							inventory.remove
-							v.dobattle_increased_deffense_five
-					else if inventory.array_item (selectItem).is_equal ("Trojan Virus") then
-							virusAttack := virusAttack + 3
-							virusesMade := virusesMade + 2
-							inventory.go_i_th (selectItem)
-							inventory.remove
-							v.dobattle_more_two_virus
+					else if inventory.array_at (selectItem).is_equal ("Invisibility Cloak") then
+							v.dobattle_luck_item
+
+					else if inventory.array_at (selectItem).is_equal ("Resurrection Stone") then
+							v.dobattle_luck_item
+
 					else
 						action := 7
 						v.dobattle_not_valid_item
+					end
+					end
+					end
+					end
+					end
+					end
 					end
 					end
 					end
@@ -260,7 +307,7 @@ feature --Operations
 				end
 
 			end
-			if action /= 6 or action /= 7 then
+			if (action /= 6 or action /= 7) then
 				if (enemyAttack > myDefense) then
 					m.set_system (m.system-(enemyAttack - myDefense))
 					v.dobattle_enemy_attack(enemyAttack,myDefense)
@@ -287,18 +334,20 @@ feature --Operations
 		end
 
 	invenRead
-		do
+	do
+
+	print("--Inventory-- %N")
 			from
 				iterator.start
 			until
 				iterator.is_off
-
 			loop
-				v.inven_read_inventory_list(inventory.item.to_string_8)
+
+				v.inven_read_inventory_list(iterator.item.to_string_8)
 				iterator.next
 			end
 			v.inven_read_bit_coin(m.cash)
-		end
+	end
 
 feature
 	random: RANDOM
