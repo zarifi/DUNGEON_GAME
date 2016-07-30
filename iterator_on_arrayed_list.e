@@ -1,5 +1,5 @@
 note
-	description: "Summary description for {ITERATOR_ON_DICTIONARY_ITEMS}."
+	description: "Summary description for {ITERATOR_ON_arrayed_list}."
 	author: ""
 	date: "$Date$"
 	revision: "$Revision$"
