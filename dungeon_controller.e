@@ -181,14 +181,14 @@ feature --Operations
 
 	doBattle(name:STRING; sentHP:INTEGER; sentAttack:INTEGER; sentDefense:INTEGER): BOOLEAN
 	local
-		enemyHP,enemyAttack,enemyDefense,myDefense,virusesMade,virusAttack, action, selectItem: INTEGER
+		enemyHP,enemyAttack,enemyDefense,virusAttack, action, selectItem: INTEGER
 		do
 			enemyHP := sentHP + m.level  + random.item \\ 1
 			enemyAttack := sentAttack + m.level  + random.item \\ 1
 			enemyDefense := sentDefense + m.level  + random.item \\ 1
 
-			myDefense := m.firewall
-			virusesMade := 0
+			m.set_myDefense(m.firewall)
+			m.set_virusesMade (0)
 			virusAttack := 0
 
 			from
@@ -196,7 +196,7 @@ feature --Operations
 			until
 				m.system <= 0 or enemyHP <= 0
 			loop
-				v.dobattle_instruction(m.system,myDefense,enemyHP,enemyAttack,enemyDefense,virusesMade,virusAttack)
+				v.dobattle_instruction(m.system,m.myDefense,enemyHP,enemyAttack,enemyDefense,m.virusesmade,virusAttack)
 				action := io.last_integer
 				-- add a rescue clause here
 				if action  < 1 or action > 6 then
@@ -206,10 +206,10 @@ feature --Operations
 
 				if action = 1 then
 
-					if virusesMade > 0 then
+					if m.virusesMade > 0 then
 						if virusAttack - enemyDefense > 0 then
 							enemyHP := enemyHP - virusAttack
-							virusesMade := virusesMade - 1
+							m.set_virusesMade(m.virusesMade - 1)
 						end
 						else
 							v.dobattle_need_virus
@@ -219,7 +219,7 @@ feature --Operations
 
 					end
 				else if action = 2 then
-					virusesMade := virusesMade + 1
+					m.set_virusesMade(m.virusesMade + 1)
 						if virusAttack > 0 then
 							virusAttack := m.viruses + m.code // 2
 							virusAttack := virusAttack + 1
@@ -229,7 +229,7 @@ feature --Operations
 				end
 				v.dobattle_build_virus
 				else if action = 3 then
-					myDefense := myDefense + (m.code + m.firewall) // 2
+					m.set_myDefense( m.myDefense + (m.code + m.firewall) // 2)
 					v.dobattle_defense_improved
 				else if action = 4 then
 					m.set_system (m.system + m.intelligence // 2 + m.code // 2)
@@ -258,17 +258,18 @@ feature --Operations
 						inventory.remove
 						v.dobattle_system_improved_5
 					else if inventory.array_item (selectItem).is_equal("Geek Help") then
-						m.set_system (m.system + 10)
+						enemyHP := 0
+						m.set_system (m.system - 10)
 						inventory.go_i_th (selectItem + 1)
 						inventory.remove
-						v.dobattle_system_improved_10
+						v.dobattle_geek_help
 					else if inventory.array_item (selectItem).is_equal("Firewall") then
-							m.set_firewall (m.firewall + 5)
+							m.set_mydefense (m.mydefense + 5)
 							inventory.go_i_th (selectItem + 1)
 							inventory.remove
 							v.dobattle_firewall_improved
 					else if inventory.array_item (selectItem).is_equal("Worm") then
-							m.set_viruses (m.viruses + 3)
+							m.set_virusesMade(m.virusesMade + 3)
 							inventory.go_i_th (selectItem + 1)
 							inventory.remove
 							v.dobattle_viruses_improved_3
@@ -308,12 +309,12 @@ feature --Operations
 
 			end
 			if (action /= 6 or action /= 7) then
-				if (enemyAttack > myDefense) then
-					m.set_system (m.system-(enemyAttack - myDefense))
-					v.dobattle_enemy_attack(enemyAttack,myDefense)
+				if (enemyAttack > m.myDefense) then
+					m.set_system (m.system-(enemyAttack - m.myDefense))
+					v.dobattle_enemy_attack(enemyAttack,m.myDefense)
 				else
 					m.set_system (m.system - enemyAttack)
-					v.dobattle_enemy_attack(enemyAttack,myDefense)
+					v.dobattle_enemy_attack(enemyAttack,m.myDefense)
 				end
 
 
