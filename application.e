@@ -11,7 +11,6 @@ create {APPLICATION_ACCESSOR}
 	make
 
 feature --Attributes
-	v:DUNGEON_VIEW
 	c:DUNGEON_CONTROLLER
 
 feature -- Initialization
@@ -38,13 +37,13 @@ feature -- Run the Application
 		--io.read_integer
 		c.class_choose
 		c.statread
-		v.app_welcome(c.m.classstring)
+		c.v.app_welcome(c.m.classstring)
 		c.m.set_accept (io.last_integer)
 
 		if c.m.accept = 0 then  --changed
-			v.app_accept_zero(c.m.classstring)
+			c.v.app_accept_zero(c.m.classstring)
 			c.m.set_name (io.last_string)
-			v.app_greate_name(c.m.name)
+			c.v.app_greate_name(c.m.name)
 			c.purchase
 
 			if c.m.purchaseno = 1 then
@@ -102,7 +101,7 @@ feature -- Run the Application
 				c.inventory.extend ("Resurrection Stone")
 
 			else
-				v.purchase_wrong_number
+				c.v.purchase_wrong_number
 				c.inventory.extend ("Microcomputer")
 				c.inventory.extend ("Geek Help")
 				c.inventory.extend ("Elder Wand")
@@ -111,7 +110,7 @@ feature -- Run the Application
 			end
 			end
 
-			v.app_message_bitcoin
+			c.v.app_message_bitcoin
 			c.m.set_cash (c.m.cash + 20)
 			c.m.set_explored (false)
 			c.m.set_room (1)
@@ -122,9 +121,9 @@ feature -- Run the Application
 				c.m.system <= 0 or c.m.win >= 5
 			loop
 				if c.m.xp = c.m.level * 100 then
-					v.app_boss_fight
+					c.v.app_boss_fight
 					if c.dobattle ("Boss", (c.m.xp + 1)*10, (c.m.xp + 1), (c.m.xp + 1)) then
-						v.app_beat_boss
+						c.v.app_beat_boss
 						c.m.set_level(c.m.level + 1)
 						c.m.set_firewall(c.m.firewall + c.m.level)
 						c.m.set_viruses( c.m.viruses + c.m.level)
@@ -148,49 +147,49 @@ feature -- Run the Application
 						if not c.m.explored then
 							c.m.set_explored (true)
 							rand := c.random.item \\ 100
-							v.app_explore_room
+							c.v.app_explore_room
 							print(rand)
 							print("%N")
 							if rand >= 0 and rand <= 10 then
-								v.app_ask_computer_open
+								c.v.app_ask_computer_open
 								open := io.last_integer
 
 								if open = 1 then
 									if c.random.item \\ 100 >= 50 then
-										v.app_malware_infection
+										c.v.app_malware_infection
 										c.m.set_system (0)
 									else
-										v.app_found_1000_bitcoin
+										c.v.app_found_1000_bitcoin
 										c.m.set_cash (c.m.cash + 1000)
 									end
 
 								end
 							else if rand > 10 and rand <= 60 then
-								v.app_enemy_coder
+								c.v.app_enemy_coder
 								if c.dobattle ("Hacker", (c.m.level+2)*5, (c.m.level+2)*2, (c.m.level+2)*2) then
-									v.app_won
+									c.v.app_won
 									c.m.set_win (c.m.win + 1)
 									c.m.set_system(c.m.system + 20)
-									v.app_win_enemy
+									c.v.app_win_enemy
 								end
 							else if rand = 99 then
-								v.app_ask_bowl_investigate
+								c.v.app_ask_bowl_investigate
 								guac := io.last_integer
 								if guac = 1 then
-									v.app_quac_key
+									c.v.app_quac_key
 									c.m.set_system (c.m.system + 100)
 									c.inventory.extend("Key")
 								else
-									v.app_not_quac
+									c.v.app_not_quac
 								end
 							else if rand > 95 then
-								v.app_encounter_mini_boss
+								c.v.app_encounter_mini_boss
 								if c.dobattle ("CEO Hacker", (c.m.level+2)*5, (c.m.level+2)*2, (c.m.level+2)*2) then
-									v.app_beat_mini_boss
+									c.v.app_beat_mini_boss
 									c.m.set_win (5)
 								end
 							else
-								v.app_find_nothing
+								c.v.app_find_nothing
 
 							end
 
@@ -201,7 +200,7 @@ feature -- Run the Application
 
 							end
 						else
-							v.app_saw_before
+							c.v.app_saw_before
 
 						end
 					else if c.m.mainoption = 2 then
@@ -220,50 +219,50 @@ feature -- Run the Application
 						c.m.set_system (c.m.system + 15)
 						c.inventory.go_i_th (c.m.selectItem + 1)
 						c.inventory.remove
-						v.dobattle_system_improved_10
+						c.v.dobattle_system_improved_10
 					else if  c.inventory.array_at (c.m.selectItem).is_equal ("PC") then
 						c.m.set_system (c.m.system + 15)
 						c.inventory.go_i_th (c.m.selectItem + 1)
 						c.inventory.remove
-						v.dobattle_system_improved_15
+						c.v.dobattle_system_improved_15
 					else if c.inventory.array_at (c.m.selectItem).is_equal ("Supercomputer") then
 						c.m.set_system (c.m.system + 20)
 						c.inventory.go_i_th (c.m.selectItem + 1)
-						v.dobattle_system_improved_20
+						c.v.dobattle_system_improved_20
 					else if c.inventory.array_item (c.m.selectItem).is_equal("Microcomputer") then
 						c.m.set_system (c.m.system + 5)
 						c.inventory.go_i_th (c.m.selectItem + 1)
 						c.inventory.remove
-						v.dobattle_system_improved_5
+						c.v.dobattle_system_improved_5
 					else if c.inventory.array_item (c.m.selectItem).is_equal("Geek Help") then
 						c.m.set_system (c.m.system + 10)
 						c.inventory.go_i_th (c.m.selectItem + 1)
 						c.inventory.remove
-						v.dobattle_system_improved_10
+						c.v.dobattle_system_improved_10
 					else if c.inventory.array_item (c.m.selectItem).is_equal("Firewall") then
 							c.m.set_firewall (c.m.firewall + 5)
 							c.inventory.go_i_th (c.m.selectItem + 1)
 							c.inventory.remove
-							v.dobattle_firewall_improved
+							c.v.dobattle_firewall_improved
 					else if c.inventory.array_item (c.m.selectItem).is_equal("Worm") then
 							c.m.set_viruses (c.m.viruses + 3)
 							c.inventory.go_i_th (c.m.selectItem + 1)
 							c.inventory.remove
-							v.dobattle_viruses_improved_3
+							c.v.dobattle_viruses_improved_3
 
 						else if c.inventory.array_at (c.m.selectItem).is_equal ("Elder Wand") then
-							v.dobattle_luck_item
+							c.v.dobattle_luck_item
 
 
 						else if c.inventory.array_at (c.m.selectItem).is_equal ("Invisibility Cloak") then
-							v.dobattle_luck_item
+							c.v.dobattle_luck_item
 
 					else if c.inventory.array_at (c.m.selectItem).is_equal ("Resurrection Stone") then
-							v.dobattle_luck_item
+							c.v.dobattle_luck_item
 
 						else
 
-										v.app_not_valid_item
+										c.v.app_not_valid_item
 							end
 							end
 							end
@@ -293,14 +292,14 @@ feature -- Run the Application
 
 			end
 			if c.m.win >= 5 then
-				v.app_win
+				c.v.app_win
 			else
-			v.app_you_died
+			c.v.app_you_died
 			end
 
 
 		else
-			v.app_village_slaughtered
+			c.v.app_village_slaughtered
 
 
 		end
