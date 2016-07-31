@@ -1,7 +1,15 @@
 note
-	description: "Summary description for {DUNGEON_CONTROLLER}."
-	author: ""
-	date: "$Date$"
+	description: "[
+	Summary description for {DUNGEON_CONTROLLER}.
+	This is a controller class, which means that this class is responsible to control
+	the communication between the model and the view class.
+	 ]"
+	author: "[
+		Mohammad Zarifi (Student no: )
+		Rachel Chang (Student no: 213530266)
+		Azade Farokhshahi (Student no: 213421706)
+		]"
+	date: "Aug 3, 2016"
 	revision: "$Revision$"
 
 class
@@ -21,7 +29,7 @@ end
 iterator:ITERATOR_ON_ARRAYED_LIST[STRING]
 inventory:ARRAYED_LIST[STRING]
 
-feature --initialization
+feature --initialization of attributes
 		make
 
 			do
@@ -31,33 +39,93 @@ feature --initialization
 
 feature --Operations
 
-	test
+	test:INTEGER
+
+		local
+		invenOption:INTEGER
 		do
-
-
-
+			inventory.extend ("first")
+			inventory.extend ("second")
+			inventory.extend ("third")
+			from
+				iterator.start
+			until
+				iterator.is_end
+			loop
+				v.invenask_instruction(iterator.item,iterator.index)
+				iterator.next
+			end
+			v.invenask_input
+			invenOption := io.last_integer
+			Result := invenOption
 
 		end
 
+
 	purchase
+	-- this feature calls the view function to display purchase options for the player to choose from
+	-- and sets the player's input in the model class in an attribute- purchaseno
+	-- which could be used accessing the model class for later use.
+
 		do
 			v.purchase_instruction
 			m.set_purchaseno (io.last_integer_32)
+
+			ensure --made change
+				purchaseno_set_properly: m.get_purchaseno = io.last_integer
+
 		end
 
+
 	main_Opt
+	-- this feature calls te view function- mainopt_instruction to display the various instructions
+	-- a player could choose from. This feature also checks if the input is valid according to the instructions
+	-- given to the player and saves the input in the model feature- mainOption for later use.
+
 		do
 			v.mainopt_instruction
-		--	m.set_mainOption (a)
-			m.set_mainoption (io.last_integer)
-		--	print("this is controller%N")
-		--	print(m.mainoption)
+			if io.last_integer > 0 and io.last_integer < 7 then  --made change
+				m.set_mainoption (io.last_integer)
+			else
+
+				from
+
+				until
+					io.last_integer > 0 and io.last_integer < 7
+				loop
+					v.invalid
+					io.read_integer
+				end
+				m.set_mainoption (io.last_integer)
+			end
+
+			ensure --made change
+				mainopt_set_properly: m.get_mainoption = io.last_integer
+
 		end
 
 	class_Choose
+	-- This feature calls the view function- class_instruction to display which identity a player
+	-- would like to be recognized as and give the player appropriate skill set which would be useful
+	-- in the game. This feature also saves the input and sets it
+	-- in the model class which could be useful later in the program/game.
 		do
 			v.classchoose_instruction
-			m.set_playerclass (io.last_integer)
+			if io.last_integer > 0 and io.last_integer < 4 then --made change
+				m.set_playerclass (io.last_integer)
+
+				else
+					from
+
+					until
+						io.last_integer >0 and io.last_integer < 4
+					loop
+						v.invalid
+						io.read_integer
+					end
+					m.set_playerclass (io.last_integer)
+			end
+
 
 			if m.playerclass = 1 then
 				m.set_classstring ("Hacker")
@@ -87,31 +155,52 @@ feature --Operations
 
 			end
 
+			ensure --made change
+				playerclass_set_properly: m.get_playerclass = io.last_integer
+
 
 		end
 
 	merchant
+	-- This feature calls the view function- merchant_instruction to display the various item the player can purchase
+	-- and update the player's list of items (inventory) according to what the player has chosen to purchase; which the player could use later in the game.
+	-- This feature also checks and saves the input.
 		do
 			v.merchant_instruction(m.get_cash)
-			m.set_buy (io.last_integer)
+
+			if io.last_integer > 0 and io.last_integer < 6  then --made change
+				m.set_buy (io.last_integer)
+				else
+					from
+
+					until
+						io.last_integer > 0 and io.last_integer < 6
+					loop
+						v.merchant_not_exist
+						v.invalid
+						io.read_integer
+					end
+					m.set_buy (io.last_integer)
+			end
+
 
 			if m.get_buy = 1 then
-				if m.get_cash >= 10 then
-					inventory.extend ("USB")
-					m.set_cash (m.cash - 10)
+				if m.get_cash >= 20 then
+					inventory.extend ("Microcomputer")
+					m.set_cash (m.cash - 20)
 				else
 					v.merchant_not_enoght_money
 				end
 			else if m.get_buy = 2 then
-				if m.get_cash >= 20 then
-					inventory.extend ("Tech Support")
-					m.set_cash (m.cash - 20)
+				if m.get_cash >= 35 then
+					inventory.extend ("Geek Help")
+					m.set_cash (m.cash - 35)
 				else
 					v.merchant_not_enoght_money
 				end
 			else if m.get_buy = 3 then
 				if m.get_cash >= 30 then
-					inventory.extend ("Trojan Virus")
+					inventory.extend ("Worm")
 					m.set_cash (m.cash - 30)
 				else
 					v.merchant_not_enoght_money
@@ -119,21 +208,22 @@ feature --Operations
 				end
 			else if m.get_buy = 4 then
 				if m.get_cash >= 15 then
-					inventory.extend ("Anti-Virus")
+					inventory.extend ("Firewall")
 					m.set_cash (m.cash - 15)
 				else
 					v.merchant_not_enoght_money
 				end
-			else
-				v.merchant_not_exist
-			end
 
 			end
 
 			end
 
+			end
+
 
 			end
+			ensure  --made change
+				buy_set_properly: m.get_buy = io.last_integer
 
 		end
 
@@ -148,49 +238,76 @@ feature --Operations
 	local
 		invenOption:INTEGER
 		do
+
 			from
 				iterator.start
 			until
-				iterator.is_off
+				iterator.is_end
 			loop
+
 				v.invenask_instruction(iterator.item,iterator.index)
 				iterator.next
 			end
 			v.invenask_input
 			invenOption := io.last_integer
-			Result := invenOption
-		end
+			if io.last_integer > 0 and io.last_integer <= inventory.upper then  --made change
+				Result := io.last_integer
+			else
+
+				from
+
+				until
+					invenOption > 0 and invenOption <= inventory.upper
+				loop
+				--	print("this is a test")
+					v.invalid
+					io.read_integer
+					invenOption := io.last_integer
+				end
+				
+				Result := io.last_integer
+			end
+
+	end
 
 	doBattle(name:STRING; sentHP:INTEGER; sentAttack:INTEGER; sentDefense:INTEGER): BOOLEAN
+	-- This feature is all about how the enemy attacks the player, how the attack effects the player's status,
+	-- and when the player attacks the enemy, this feature updates the enemy's status accordingly.
+	-- This feature is called when the player encounter's an enemy.
+	require			--made change
+		valid_hp_arg: sentHP > 0
+		valid_attack_arg: sentAttack >0
+		valid_defense_arg: sentDefense > 0
 	local
-		enemyHP,enemyAttack,enemyDefense,myDefense,virusesMade,virusAttack, action, selectItem: INTEGER
+		enemyHP,enemyAttack,enemyDefense,virusAttack, action, selectItem: INTEGER
 		do
 			enemyHP := sentHP + m.level  + random.item \\ 1
 			enemyAttack := sentAttack + m.level  + random.item \\ 1
 			enemyDefense := sentDefense + m.level  + random.item \\ 1
 
-			myDefense := m.firewall
-			virusesMade := 0
+			m.set_myDefense(m.firewall)
+			m.set_virusesMade (0)
 			virusAttack := 0
 
 			from
 
 			until
-				m.system < 0 or enemyHP < 0
+				m.system <= 0 or enemyHP <= 0			--if one of it becomes true exit loop
 			loop
-				v.dobattle_instruction(m.system,myDefense,enemyHP,enemyAttack,enemyDefense,virusesMade,virusAttack)
+				v.dobattle_instruction(m.system,m.myDefense,enemyHP,enemyAttack,enemyDefense,m.virusesmade,virusAttack)
 				action := io.last_integer
-				-- add a rescue clause here
+
 				if action  < 1 or action > 6 then
 					action := 7
 					v.dobattle_not_valid_no
 				end
 
 				if action = 1 then
-					if virusesMade > 0 then
+
+					if m.virusesMade > 0 then
 						if virusAttack - enemyDefense > 0 then
 							enemyHP := enemyHP - virusAttack
-							virusesMade := virusesMade - 1
+							m.set_virusesMade(m.virusesMade - 1)
 						end
 						else
 							v.dobattle_need_virus
@@ -200,7 +317,7 @@ feature --Operations
 
 					end
 				else if action = 2 then
-					virusesMade := virusesMade + 1
+					m.set_virusesMade(m.virusesMade + 1)
 						if virusAttack > 0 then
 							virusAttack := m.viruses + m.code // 2
 							virusAttack := virusAttack + 1
@@ -210,39 +327,68 @@ feature --Operations
 				end
 				v.dobattle_build_virus
 				else if action = 3 then
-					myDefense := myDefense + (m.code + m.firewall) // 2
+					m.set_myDefense( m.myDefense + (m.code + m.firewall) // 2)
 					v.dobattle_defense_improved
 				else if action = 4 then
-					m.set_system (m.intelligence // 2 + m.code // 2)
+					m.set_system (m.system + m.intelligence // 2 + m.code // 2)
 					v.dobattle_system_improved
 				else if action = 5 then
-					m.set_selectitem (invenAsk)
+					selectItem := invenAsk - 1
 
-					if inventory.array_item (selectItem).is_equal ("USB") then
+					if  inventory.array_at (selectItem).is_equal ("Embedded Computer") then
+							m.set_system (m.system + 15)
+							inventory.go_i_th (selectItem + 1)
+							inventory.remove
+							v.dobattle_system_improved_10
+					else if  inventory.array_at (selectItem).is_equal ("PC") then
 						m.set_system (m.system + 15)
-						inventory.go_i_th (selectItem)
+						inventory.go_i_th (selectItem + 1)
 						inventory.remove
-						v.dobattle_repaired_system
-					else if inventory.array_item (selectItem).is_equal("Tech Support") then
-						v.dobattle_leave_battle
-						inventory.go_i_th (selectItem)
+						v.dobattle_system_improved_15
+					else if inventory.array_at (selectItem).is_equal ("Supercomputer") then
+						m.set_system (m.system + 20)
+						inventory.go_i_th (selectItem + 1)
 						inventory.remove
-						Result := True
+						v.dobattle_system_improved_20
+					else if inventory.array_item (selectItem).is_equal("Microcomputer") then
+						m.set_system (m.system + 5)
+						inventory.go_i_th (selectItem + 1)
+						inventory.remove
+						v.dobattle_system_improved_5
+					else if inventory.array_item (selectItem).is_equal("Geek Help") then
+						enemyHP := 0
+						m.set_system (m.system - 10)
+						inventory.go_i_th (selectItem + 1)
+						inventory.remove
+						v.dobattle_geek_help
+					else if inventory.array_item (selectItem).is_equal("Firewall") then
+							m.set_mydefense (m.mydefense + 5)
+							inventory.go_i_th (selectItem + 1)
+							inventory.remove
+							v.dobattle_firewall_improved
+					else if inventory.array_item (selectItem).is_equal("Worm") then
+							m.set_virusesMade(m.virusesMade + 3)
+							inventory.go_i_th (selectItem + 1)
+							inventory.remove
+							v.dobattle_viruses_improved_3
+					else if inventory.array_at (selectItem).is_equal ("Elder Wand") then
+							v.dobattle_luck_item
 
-					else if inventory.array_item (selectItem).is_equal ("Anti-Virus") then
-							myDefense := myDefense + 5
-							inventory.go_i_th (selectItem)
-							inventory.remove
-							v.dobattle_increased_deffense_five
-					else if inventory.array_item (selectItem).is_equal ("Trojan Virus") then
-							virusAttack := virusAttack + 3
-							virusesMade := virusesMade + 2
-							inventory.go_i_th (selectItem)
-							inventory.remove
-							v.dobattle_more_two_virus
+					else if inventory.array_at (selectItem).is_equal ("Invisibility Cloak") then
+							v.dobattle_luck_item
+
+					else if inventory.array_at (selectItem).is_equal ("Resurrection Stone") then
+							v.dobattle_luck_item
+
 					else
 						action := 7
 						v.dobattle_not_valid_item
+					end
+					end
+					end
+					end
+					end
+					end
 					end
 					end
 					end
@@ -260,13 +406,13 @@ feature --Operations
 				end
 
 			end
-			if action /= 6 or action /= 7 then
-				if (enemyAttack > myDefense) then
-					m.set_system (m.system-(enemyAttack - myDefense))
-					v.dobattle_enemy_attack(enemyAttack,myDefense)
+			if (action /= 6 or action /= 7) then
+				if (enemyAttack > m.myDefense) then
+					m.set_system (m.system-(enemyAttack - m.myDefense))
+					v.dobattle_enemy_attack(enemyAttack,m.myDefense)
 				else
 					m.set_system (m.system - enemyAttack)
-					v.dobattle_enemy_attack(enemyAttack,myDefense)
+					v.dobattle_enemy_attack(enemyAttack,m.myDefense)
 				end
 
 
@@ -287,18 +433,21 @@ feature --Operations
 		end
 
 	invenRead
-		do
+	-- prints the list of items the player has in his inventory.
+	do
+
+	print("--Inventory-- %N")
 			from
 				iterator.start
 			until
 				iterator.is_off
-
 			loop
-				v.inven_read_inventory_list(inventory.item.to_string_8)
+
+				v.inven_read_inventory_list(iterator.item.to_string_8)
 				iterator.next
 			end
 			v.inven_read_bit_coin(m.cash)
-		end
+	end
 
 feature
 	random: RANDOM

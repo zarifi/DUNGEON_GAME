@@ -1,7 +1,15 @@
 note
-	description: "Summary description for {DUNGEON_MODEL}."
-	author: ""
-	date: "$Date$"
+	description: "[
+	Summary description for {DUNGEON_MODEL}.
+	This class is like a database for the game, it stores all the attributes value of the game. 
+	It enables the controller class class to access these data or set these data whenever a attribute is updated during the game.
+	]"
+	author: "[
+		Mohammad Zarifi (Student no: )
+		Rachel Chang (Student no: 213530266)
+		Azade Farokhshahi (Student no: 213421706)
+		]"
+	date: "Aug 3, 2016"
 	revision: "$Revision$"
 
 class
@@ -20,10 +28,12 @@ feature --All attributes in the project
 		cash: INTEGER			assign set_cash
 		level: INTEGER			assign set_level
 		XP: INTEGER				assign set_xp
-		mainOption: INTEGER
+		mainOption: INTEGER_32		assign set_mainOption
 		room: INTEGER
 		playerClass: INTEGER
-
+		win:INTEGER				assign set_win
+		myDefense:INTEGER		assign set_myDefense
+		virusesMade:INTEGER		assign set_virusesMade
 		--inventory: ARRAYED_LIST[STRING]
 
 		purchaseNo: INTEGER
@@ -62,6 +72,9 @@ feature --Initializing the attributes in the project
 		guac := 0
 		selectItem := 0
 		name := ""
+		win := 0
+		myDefense := 0
+		virusesMade := 0
 
 	end
 
@@ -178,10 +191,16 @@ feature -- mutators - also known as the settler; changes some property of an obj
 		-- It helps the controller/user to change or update the values/data of the attributes throughout the program.
 		-- It helps to keep track of the most recent value of an attribute.
 
+
 			set_classString(s:STRING)
 					do
 						classString := s
 					end
+
+			set_win(n:INTEGER)
+				do
+					win := n
+				end
 
 			set_firewall(n: INTEGER)
 				do
@@ -228,15 +247,10 @@ feature -- mutators - also known as the settler; changes some property of an obj
 				room := n
 			end
 
-			set_mainOption(n:INTEGER)
+			set_mainOption(n:INTEGER_32)
 			do
 				mainOption := n
 			end
-
---			set_classString(n:STRING)
---			do
---				classString := n
---			end
 
 			set_playerClass(n:INTEGER)
 			do
@@ -282,5 +296,15 @@ feature -- mutators - also known as the settler; changes some property of an obj
 			do
 				name := n
 			end
+
+			set_myDefense(n:INTEGER)
+				do
+					myDefense := n
+				end
+
+			set_virusesMade(n:INTEGER)
+				do
+					virusesMade := n
+				end
 
 end
