@@ -1,7 +1,14 @@
 note
-	description: "Summary description for {APPLICATION_ACCESSOR}."
-	author: ""
-	date: "$Date$"
+	description: "[
+	Summary description for {APPLICATION_ACCESSOR}.
+	Shows singleton design as it creates one instance of the application class.
+	]"
+	author: "[
+		Mohammad Zarifi (Student no: )
+		Rachel Chang (Student no: 213530266)
+		Azade Farokhshahi (Student no: 213421706)
+		]"
+	date: "Aug 3, 2016"
 	revision: "$Revision$"
 
 class
