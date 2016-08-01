@@ -5,7 +5,7 @@ note
 	It enables the controller class class to access these data or set these data whenever a attribute is updated during the game.
 	]"
 	author: "[
-		Mohammad Zarifi (Student no: )
+		Mohammad Zarifi (Student no:213320437 )
 		Rachel Chang (Student no: 213530266)
 		Azade Farokhshahi (Student no: 213421706)
 		]"
@@ -190,121 +190,190 @@ feature -- accessors - features/routines that accesses data in the project.
 feature -- mutators - also known as the settler; changes some property of an object.
 		-- It helps the controller/user to change or update the values/data of the attributes throughout the program.
 		-- It helps to keep track of the most recent value of an attribute.
+		-- For each mutators we are using postcondition to ensure that the value is correctly set to the attribute
 
 
 			set_classString(s:STRING)
 					do
 						classString := s
+
+					ensure
+						classString = s
 					end
 
 			set_win(n:INTEGER)
 				do
 					win := n
+
+				ensure
+					win = n
 				end
 
 			set_firewall(n: INTEGER)
 				do
 					firewall := n
+
+				ensure
+					firewall = n
 				end
 
 			set_viruses(n: INTEGER)
 				do
 					viruses := n
+
+				ensure
+					viruses = n
 				end
 
 			set_code(n: INTEGER)
 			do
 				code := n
+
+			ensure
+				code = n
 			end
 
 			set_system(n:INTEGER)
 			do
 				system := n
+
+			ensure
+				system = n
 			end
 
 			set_intelligence(n:INTEGER)
 			do
 				intelligence := n
+
+			ensure
+				intelligence = n
 			end
 
 			set_cash(n:INTEGER)
 			do
 				cash := n
+
+			ensure
+				cash = n
 			end
 
 			set_level(n:INTEGER)
 			do
 				level := n
+			ensure
+				level = n
 			end
 
 			set_xp(n:INTEGER)
 			do
 				XP := n
+
+			ensure
+				XP = n
 			end
 
 			set_room(n:INTEGER)
 			do
 				room := n
+
+			ensure
+				room = n
 			end
 
 			set_mainOption(n:INTEGER_32)
 			do
 				mainOption := n
+
+			ensure
+				mainOption = n
 			end
 
 			set_playerClass(n:INTEGER)
 			do
 				playerClass := n
+
+			ensure
+				playerClass = n
 			end
 
 			set_purchaseNo(n:INTEGER)
 			do
 				purchaseNo := n
+
+			ensure
+				purchaseNo = n
 			end
 
 			set_buy(n:INTEGER)
 			do
 				buy := n
+
+			ensure
+				buy = n
 			end
 
 			set_accept(n:INTEGER)
 			do
 				accept := n
+
+			ensure
+				accept = n
 			end
 
 			set_explored(n:BOOLEAN)
 			do
 				explored := n
+
+			ensure
+				explored = n
 			end
 
 			set_open(n:INTEGER)
 			do
 				open := n
+
+			ensure
+				open = n
 			end
 
 			set_guac(n:INTEGER)
 			do
 				guac := n
+
+			ensure
+				guac = n
 			end
 
 			set_selectItem(n:INTEGER)
 			do
 				selectItem := n
+
+			ensure
+				selectItem = n
 			end
 
 			set_name(n:STRING)
 			do
 				name := n
+
+			ensure
+				name = n
 			end
 
 			set_myDefense(n:INTEGER)
 				do
 					myDefense := n
+
+				ensure
+					myDefense = n
 				end
 
 			set_virusesMade(n:INTEGER)
 				do
 					virusesMade := n
+
+				ensure
+					virusesMade = n
 				end
 
 end

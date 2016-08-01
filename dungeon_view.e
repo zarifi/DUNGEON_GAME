@@ -5,7 +5,7 @@ note
 		by displaying instructions and choices for the player to make during the game.
 	]"
 	author: "[
-		Mohammad Zarifi (Student no: )
+		Mohammad Zarifi (Student no:213320437 )
 		Rachel Chang (Student no: 213530266)
 		Azade Farokhshahi (Student no: 213421706)
 		]"
@@ -43,8 +43,8 @@ feature
 	purchase_Instruction
 		--Display items which can be purchased by the user in 3 different gorups
 	do
-		print("<1> Supercomputer, (2) Geek Help, (1) Worm, (1) Microcomputer, Elder Wand %N")
-		print("<2> PC, (2) Microcomputer, (3) Geek Help, (3) Worm, (1) Firewall, Invisibility Cloak %N")
+		print("<1> Supercomputer, (1) Geek Help, (1) Worm, (1) Microcomputer, Elder Wand %N")
+		print("<2> PC, (2) Microcomputer, (1) Geek Help, (3) Worm, (1) Firewall, Invisibility Cloak %N")
 		print("<3> Embedded Computer, (3) Microcomputer, (2) Geek Help, (3) Worm, (1) Firewall,Resurrection Stone %N")
 		io.read_integer
 
@@ -316,7 +316,7 @@ feature
 
 		doBattle_viruses_improved_3
 			do
-				print("Your viruses have been improved by 3 %N")
+				print("Your viruse's power have been improved by 3 %N")
 			end
 
 		doBattle_luck_item
@@ -356,7 +356,7 @@ feature
 				print ("Welcome to the Dunegon game!%N")
 
 
-						print("You are travelling on a long journey away from your home in the land of C.%N")
+						print("You are travelling on a long journey away from your home in the land of Eiffel.%N")
 						print("In the distance you see a travler.%N")
 						print("%N")
 						print("Villager: Greetings young ")

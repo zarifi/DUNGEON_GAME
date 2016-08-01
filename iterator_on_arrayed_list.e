@@ -7,7 +7,7 @@ note
 	in this game it goes through a list of inventories which the player possess.
 	]"
 	author: "[
-		Mohammad Zarifi (Student no: )
+		Mohammad Zarifi (Student no:213320437 )
 		Rachel Chang (Student no: 213530266)
 		Azade Farokhshahi (Student no: 213421706)
 	]"

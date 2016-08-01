@@ -5,7 +5,7 @@ note
 	the communication between the model and the view class.
 	 ]"
 	author: "[
-		Mohammad Zarifi (Student no: )
+		Mohammad Zarifi (Student no:213320437 )
 		Rachel Chang (Student no: 213530266)
 		Azade Farokhshahi (Student no: 213421706)
 		]"
@@ -38,29 +38,6 @@ feature --initialization of attributes
 			end
 
 feature --Operations
-
-	test:INTEGER
-
-		local
-		invenOption:INTEGER
-		do
-			inventory.extend ("first")
-			inventory.extend ("second")
-			inventory.extend ("third")
-			from
-				iterator.start
-			until
-				iterator.is_end
-			loop
-				v.invenask_instruction(iterator.item,iterator.index)
-				iterator.next
-			end
-			v.invenask_input
-			invenOption := io.last_integer
-			Result := invenOption
-
-		end
-
 
 	purchase
 	-- this feature calls the view function to display purchase options for the player to choose from
@@ -264,7 +241,7 @@ feature --Operations
 					io.read_integer
 					invenOption := io.last_integer
 				end
-				
+
 				Result := io.last_integer
 			end
 
@@ -279,14 +256,14 @@ feature --Operations
 		valid_attack_arg: sentAttack >0
 		valid_defense_arg: sentDefense > 0
 	local
-		enemyHP,enemyAttack,enemyDefense,virusAttack, action, selectItem: INTEGER
+		enemyHP,enemyAttack,enemyDefense,virusAttack, action,virusesMade, selectItem: INTEGER
 		do
 			enemyHP := sentHP + m.level  + random.item \\ 1
 			enemyAttack := sentAttack + m.level  + random.item \\ 1
 			enemyDefense := sentDefense + m.level  + random.item \\ 1
 
 			m.set_myDefense(m.firewall)
-			m.set_virusesMade (0)
+			virusesMade := 0
 			virusAttack := 0
 
 			from
@@ -304,10 +281,10 @@ feature --Operations
 
 				if action = 1 then
 
-					if m.virusesMade > 0 then
+					if virusesMade > 0 then
 						if virusAttack - enemyDefense > 0 then
 							enemyHP := enemyHP - virusAttack
-							m.set_virusesMade(m.virusesMade - 1)
+							virusesMade := virusesMade - 1
 						end
 						else
 							v.dobattle_need_virus
@@ -317,7 +294,7 @@ feature --Operations
 
 					end
 				else if action = 2 then
-					m.set_virusesMade(m.virusesMade + 1)
+						virusesMade := virusesMade + 1
 						if virusAttack > 0 then
 							virusAttack := m.viruses + m.code // 2
 							virusAttack := virusAttack + 1
@@ -367,7 +344,7 @@ feature --Operations
 							inventory.remove
 							v.dobattle_firewall_improved
 					else if inventory.array_item (selectItem).is_equal("Worm") then
-							m.set_virusesMade(m.virusesMade + 3)
+							m.set_viruses(m.viruses + 3)
 							inventory.go_i_th (selectItem + 1)
 							inventory.remove
 							v.dobattle_viruses_improved_3

@@ -7,7 +7,7 @@ note
 		at appropriate times in the game.
 		]"
 	author: "[
-		Mohammad Zarifi (Student no: )
+		Mohammad Zarifi (Student no:213320437 )
 		Rachel Chang (Student no: 213530266)
 		Azade Farokhshahi (Student no: 213421706)
 		]"
@@ -63,7 +63,7 @@ feature -- Run the Application
 		end
 
 
-		if c.m.accept = 0 then  
+		if c.m.accept = 0 then
 			c.v.app_accept_zero(c.m.classstring)
 			c.m.set_name (io.last_string)
 			c.v.app_greate_name(c.m.name)
@@ -78,7 +78,6 @@ feature -- Run the Application
 
 				--Inventory Update
 				c.inventory.extend ("Supercomputer")
-				c.inventory.extend ("Geek Help")
 				c.inventory.extend ("Geek Help")
 				c.inventory.extend ("Worm")
 				c.inventory.extend ("Worm")
@@ -96,8 +95,6 @@ feature -- Run the Application
 
 				c.inventory.extend ("Microcomputer")
 				c.inventory.extend ("Microcomputer")
-				c.inventory.extend ("Geek Help")
-				c.inventory.extend ("Geek Help")
 				c.inventory.extend ("Geek Help")
 				c.inventory.extend ("Worm")
 				c.inventory.extend ("Worm")
@@ -166,7 +163,7 @@ feature -- Run the Application
 				--	print(m.get_mainoption)
 				--	print(m.get_mainoption = 1)
 					if c.m.get_mainoption = 1 then
-						print(not c.m.explored)
+					--	print(not c.m.explored)
 						if not c.m.explored then
 							c.m.set_explored (true)
 							rand := c.random.item \\ 100
