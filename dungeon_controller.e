@@ -53,7 +53,6 @@ feature --Operations
 
 		end
 
-
 	main_Opt
 	-- this feature calls te view function- mainopt_instruction to display the various instructions
 	-- a player could choose from. This feature also checks if the input is valid according to the instructions
@@ -271,7 +270,7 @@ feature --Operations
 			until
 				m.system <= 0 or enemyHP <= 0			--if one of it becomes true exit loop
 			loop
-				v.dobattle_instruction(m.system,m.myDefense,enemyHP,enemyAttack,enemyDefense,m.virusesmade,virusAttack)
+				v.dobattle_instruction(m.system,m.myDefense,enemyHP,enemyAttack,enemyDefense,virusesmade,virusAttack)
 				action := io.last_integer
 
 				if action  < 1 or action > 6 then

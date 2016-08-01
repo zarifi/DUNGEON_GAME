@@ -33,7 +33,6 @@ feature --All attributes in the project
 		playerClass: INTEGER
 		win:INTEGER				assign set_win
 		myDefense:INTEGER		assign set_myDefense
-		virusesMade:INTEGER		assign set_virusesMade
 		--inventory: ARRAYED_LIST[STRING]
 
 		purchaseNo: INTEGER
@@ -74,7 +73,7 @@ feature --Initializing the attributes in the project
 		name := ""
 		win := 0
 		myDefense := 0
-		virusesMade := 0
+
 
 	end
 
@@ -368,12 +367,6 @@ feature -- mutators - also known as the settler; changes some property of an obj
 					myDefense = n
 				end
 
-			set_virusesMade(n:INTEGER)
-				do
-					virusesMade := n
 
-				ensure
-					virusesMade = n
-				end
 
 end

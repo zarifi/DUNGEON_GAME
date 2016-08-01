@@ -31,13 +31,14 @@ feature -- Initialization
 			--| Add your code here
 
 			create c.make
-			current.run
+			current.run -- executing the game 
 
 		end
 
 feature -- Run the Application
 
 	run
+		--this routine will execute the game
 	local
 		rand, open, guac:INTEGER
 	do
@@ -201,8 +202,9 @@ feature -- Run the Application
 								if c.dobattle ("Hacker", (c.m.level+2)*5, (c.m.level+2)*2, (c.m.level+2)*2) then
 									c.v.app_won
 									c.m.set_win (c.m.win + 1)
-									c.m.set_system(c.m.system + 20)
+									c.m.set_system (c.m.system + 20)
 									c.v.app_win_enemy
+
 								end
 							else if rand = 99 then
 								c.v.app_ask_bowl_investigate

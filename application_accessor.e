@@ -4,6 +4,7 @@ note
 	Shows singleton design as it creates one instance of the application class.
 	]"
 	author: "[
+
 		Mohammad Hossein Zarifi (Student no:213320437 )
 		Rachel Chang (Student no: 213530266)
 		Azade Farokhshahi (Student no: 213421706)

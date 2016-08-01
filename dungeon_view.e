@@ -59,7 +59,7 @@ feature
 	mainOpt_Instruction
 		--Give the user 6 different option to choose
 		do
-			print("Look around %N")
+			print("Look around the room: %N")
 			print("<1> Look around%N")
 			print("<2> Talk to the Shady Dealer in the corner%N")
 			print("<3> Inventory%N")
@@ -170,7 +170,7 @@ feature
 		do
 			print("Action: %N")
 			print("<1> Send out virus. %N")
-			print("<2> Build. %N")
+			print("<2> Build a virus. %N")
 			print("<3> Work on system defense. %N")
 			print("<4> Repair system. %N")
 			print("<5> Use Item. %N")
@@ -557,7 +557,7 @@ feature
 
 			app_win_enemy
 				do
-					print("Awsome! You beat the enemy! Your system status has been improved by 20 points.%N")
+					print("Awesome! You beat the enemy! Your system status has been improved by 20 points.%N")
 
 				end
 
