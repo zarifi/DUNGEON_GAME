@@ -123,7 +123,7 @@ feature
 				print(firewall)
 				print("%N")
 
-				print("Viruses: ")
+				print("Viruse's power: ")
 				print(viruses)
 				print("%N")
 
