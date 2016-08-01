@@ -1,7 +1,17 @@
 note
-	description: "Summary description for {ITERATOR_ON_DICTIONARY_ITEMS}."
-	author: ""
-	date: "$Date$"
+	description: "[
+	Summary description for {ITERATOR_ON_ARRAYED_LIST}.
+	This class inherits a deferred class ITEATOR[E];
+	the implementation of all the methods of the deferred class is seen in this class.
+	This class provides the property of iterating through a list of items, 
+	in this game it goes through a list of inventories which the player possess.
+	]"
+	author: "[
+		Mohammad Zarifi (Student no: )
+		Rachel Chang (Student no: 213530266)
+		Azade Farokhshahi (Student no: 213421706)
+	]"
+	date: "Aug 3, 2016"
 	revision: "$Revision$"
 
 class
