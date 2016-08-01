@@ -24,6 +24,7 @@ feature --All attributes in the project
 		room: INTEGER
 		playerClass: INTEGER
 		win:INTEGER				assign set_win
+		myDefense:INTEGER		assign set_myDefense
 
 		--inventory: ARRAYED_LIST[STRING]
 
@@ -64,6 +65,7 @@ feature --Initializing the attributes in the project
 		selectItem := 0
 		name := ""
 		win := 0
+		myDefense := 0
 
 	end
 
@@ -290,5 +292,11 @@ feature -- mutators - also known as the settler; changes some property of an obj
 			do
 				name := n
 			end
+
+			set_myDefense(n:INTEGER)
+				do
+					myDefense := n
+				end
+
 
 end
