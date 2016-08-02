@@ -88,110 +88,168 @@ feature -- accessors - features/routines that accesses data in the project.
 			get_classString:STRING
 				do
 					Result := classString
+
+				ensure
+					Result = classString
 				end
+
 			get_firewall: INTEGER
 			do
 				Result := firewall
+
+			ensure
+				Result = firewall
 			end
 
 			get_viruses: INTEGER
 			do
 				Result := viruses
+
+			ensure
+				Result = viruses
 			end
 
 			get_code: INTEGER
 			do
 				Result := code
+			ensure
+				Result = code
 			end
 
 			get_system: INTEGER
 			do
 				Result := system
+			ensure
+				Result = system
+
 			end
 
 			get_intelligence: INTEGER
 			do
 				Result := intelligence
+
+			ensure
+				Result = intelligence
 			end
 
 			get_cash: INTEGER
 			do
 				Result := cash
+
+			ensure
+				Result = cash
 			end
 
 			get_level: INTEGER
 			do
 				Result := level
+			ensure
+				Result = level
 			end
 
 			get_XP: INTEGER
 			do
 				Result := XP
+
+			ensure
+				Result = XP
 			end
 
 			get_room: INTEGER
 			do
 				Result := room
+			ensure
+				Result = room
 			end
 
 			get_mainOption: INTEGER
 			do
 				Result := mainOption
+			ensure
+				Result = mainOption
 			end
 
 
 			get_playerClass: INTEGER
 			do
 				Result := playerClass
+
+			ensure
+				Result = playerClass
 			end
 
 			get_purchaseNo: INTEGER
 			do
 				Result := purchaseNo
+
+			ensure
+				Result = purchaseNo
 			end
 
 			get_buy: INTEGER
 			do
 				Result := buy
+
+			ensure
+				Result = buy
 			end
 
 			get_accept: INTEGER
 			do
 				Result := accept
+
+			ensure
+				Result = accept
 			end
 
 			get_explored: BOOLEAN
 			do
 				Result := explored
+
+			ensure
+				Result = explored
 			end
 
 			get_open: INTEGER
 			do
 				Result := open
+
+			ensure
+				Result = open
 			end
 
 			get_guac: INTEGER
 			do
 				Result := guac
+
+			ensure
+				Result = guac
 			end
 
 			get_selectItem: INTEGER
 			do
 				Result := selectItem
+
+			ensure
+				Result = selectItem
 			end
 
 			get_name: STRING
 			do
 				Result := name
+
+			ensure
+				Result = name
 			end
 
 
 feature -- mutators - also known as the settler; changes some property of an object.
 		-- It helps the controller/user to change or update the values/data of the attributes throughout the program.
 		-- It helps to keep track of the most recent value of an attribute.
-		-- For each mutators we are using postcondition to ensure that the value is correctly set to the attribute
 
+	-- For each mutators we are using postcondition to ensure that the value is correctly set to the attribute
 
+	--For the accessor routines we are using post condition to ensure correct value is being returend
 			set_classString(s:STRING)
 					do
 						classString := s

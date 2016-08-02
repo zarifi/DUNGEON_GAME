@@ -163,7 +163,7 @@ feature --Operations
 			if m.get_buy = 1 then
 				if m.get_cash >= 20 then
 					inventory.extend ("Microcomputer")
-					m.set_cash (m.cash - 20)
+					m.set_cash (m.cash - 10)
 				else
 					v.merchant_not_enoght_money
 				end
