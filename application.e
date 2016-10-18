@@ -31,7 +31,7 @@ feature -- Initialization
 			--| Add your code here
 
 			create c.make
-			current.run -- executing the game 
+			current.run -- executing the game
 
 		end
 
